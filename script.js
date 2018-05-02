@@ -9,8 +9,10 @@ $(function() {
         messagingSenderId: "480642201727"
     };
     firebase.initializeApp(config);
+    
+    console.log(document.location.href.match(/[^\/]+$/)[0]);
 
-    firebase.auth().onAuthStateChanged(function(user) {
+    let usuario = firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
             let photo = user.photoURL;
@@ -20,6 +22,7 @@ $(function() {
             $(".userImage").attr('src', photo);
             $('.userImageItem').css('display', 'inline-block');
             $(".userImage").css('border-radius', '50%');
+            return user;
 
         }
         else {
@@ -31,6 +34,7 @@ $(function() {
 
         }
     });
+    console.log(usuario.displayName);
 
     function login() {
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -43,44 +47,11 @@ $(function() {
     }
 
 
-    // checkUserStatus(false);
-
-    // function checkUserStatus(buttonPressed) {
-    //     function statusChecker(user) {
-    //         if (user) {
-    //             $('.log').html('Log Out')
-    //         }
-    //         else {
-    //             $('.log').html('Log In')
-    //         }
-    //         console.log(user);
-    //     }
-
-    //     function newLogin(user) {
-    //         if (user) {
-    //             return false;
-    //         }
-    //         else {
-    //             var provider = new firebase.auth.GoogleAuthProvider();
-    //             firebase.auth().signInWithRedirect(provider);
-    //         }
-    //         console.log(user);
-    //     }
-
-    //     console.log(firebase.auth);
-    //     var auth = firebase.auth();
-    //     if (!buttonPressed) {
-    //         auth.onAuthStateChanged(statusChecker());
-    //     }
-    //     if (butttonPressed) {
-    //         auth.onAuthStateChanged(newLogin());
-    //     }
-    // }
-
+    
     $('.logInButton').click(function() {
         login();
     });
-    
+
     $('.logOutButton').click(function() {
         logout();
     });
