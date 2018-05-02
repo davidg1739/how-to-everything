@@ -9,10 +9,9 @@ $(function() {
         messagingSenderId: "480642201727"
     };
     firebase.initializeApp(config);
-    
-    console.log(document.location.href.match(/[^\/]+$/)[0]);
 
-    let usuario = firebase.auth().onAuthStateChanged(function(user) {
+    // console.log(document.location.href.match(/[^\/]+$/)[0]);
+    firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
             let photo = user.photoURL;
@@ -22,8 +21,6 @@ $(function() {
             $(".userImage").attr('src', photo);
             $('.userImageItem').css('display', 'inline-block');
             $(".userImage").css('border-radius', '50%');
-            return user;
-
         }
         else {
             // No user is signed in.
@@ -34,7 +31,6 @@ $(function() {
 
         }
     });
-    console.log(usuario.displayName);
 
     function login() {
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -46,8 +42,6 @@ $(function() {
         firebase.auth().signOut();
     }
 
-
-    
     $('.logInButton').click(function() {
         login();
     });
