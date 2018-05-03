@@ -79,7 +79,7 @@ body {
 
 .content {
     background-color: #688986;
-    width:100%;
+    width: 100%;
     height: 100%;
 }
 
@@ -91,15 +91,15 @@ body {
 }
 
 .introText {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     display: table;
     text-align: center;
 }
 
 .aboutText {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     display: table;
     text-align: center;
 }
@@ -135,5 +135,25 @@ body {
 }
 
 .categorieyContentDiv {
-    margin:auto;
+    margin: auto;
+}
+
+.githubProfileLink {
+    border: 5px double lightblue;
+}
+
+.githubProfileLink:link,
+.githubProfileLink:visited {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+.githubProfileLink:hover,
+.githubProfileLink:active {
+    background-color: red;
 }
