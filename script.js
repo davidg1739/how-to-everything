@@ -51,7 +51,7 @@ $(function() {
     console.log(currentPage);
     
     function gotData(data) {
-        if ( == 'index.html' || currentPage = '') {
+        if ( currentPage == 'index.html' || currentPage = '') {
             return;
         }
         else if (currentPage == 'coding.html') {
