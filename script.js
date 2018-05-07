@@ -36,12 +36,22 @@ $(function() {
     coding.once("value", gotData, errData);
 
     var currentPage = document.location;
+    var tempText;
     currentPage = currentPage.toString();
-    
+    if (currentPage.lastIndexOf('/')) {
+        let tempNum = currentPage.lastIndexOf('/');
+        let pageLength = currentPage.length;
+        tempText = [];
+        while (tempNum <= pageLength) {
+            tempText.push(currentPage[tempNum]);
+            tempNum+=1;
+        }
+    }
+    currentPage = tempText;
     console.log(currentPage);
     
     function gotData(data) {
-        if (currentPage == 'index.html') {
+        if ( == 'index.html' || currentPage = '') {
             return;
         }
         else if (currentPage == 'coding.html') {
