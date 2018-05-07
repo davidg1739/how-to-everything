@@ -47,11 +47,12 @@ $(function() {
             tempNum+=1;
         }
     }
+    tempText = tempText.toString();
     currentPage = tempText;
     console.log(currentPage);
     
     function gotData(data) {
-        if ( currentPage == 'index.html' || currentPage = '') {
+        if (currentPage == 'index.html' || currentPage == '') {
             return;
         }
         else if (currentPage == 'coding.html') {
