@@ -1,4 +1,21 @@
+var c;
+
+function setup() {
+    c = getURLParams();
+    if (c.id != undefined) {
+        return;
+    }
+    else {
+        // let tempLink = $('<a></a>');
+        // tempLink.attr('href', '?id=' + userInput);
+        // tempLink.html(userInput);
+        // let para = $('#content');
+    }
+}
+
 $(function() {
+    console.log(c);
+    var database;
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyBf9c50Uf0zQTvM7t-MX7ziDmawbqZWYOA",
@@ -10,7 +27,58 @@ $(function() {
     };
     firebase.initializeApp(config);
 
-    // console.log(document.location.href.match(/[^\/]+$/)[0]);
+    database = firebase.database();
+    var coding = database.ref('coding');
+    var cooking = database.ref('cooking');
+    var science = database.ref('science');
+    var gitTutorials = coding.child('Git-Github')
+
+    coding.once("value", gotData, errData);
+
+    var currentPage = document.location.href.match(/[^\/]+$/)[0];
+    currentPage = currentPage.toString();
+    
+    console.log(currentPage);
+    
+    function gotData(data) {
+        if (currentPage == 'index.html') {
+            return;
+        }
+        else if (currentPage == 'coding.html') {
+            $('.clickableCodeLinks').empty();
+            let newData = data.val();
+            console.log(newData);
+            // Grab the keys to iterate over the comments
+            var keys = Object.keys(newData);
+
+            for (var i = 0; i < keys.length; i++) {
+                var key = keys[i];
+                let dataPiece = newData[key];
+                console.log(dataPiece);
+                let param = newData[key].Parameter;
+                param = param.toString();
+                console.log(param);
+                let title = newData[key].Title;
+                console.log(title);
+
+                let tempLink = $('<a></a>');
+                tempLink.attr('href', '?id=' + param);
+                tempLink.html(title);
+                console.log(tempLink);
+                let tempDiv = $('<div></div>');
+                tempDiv.append(tempLink);
+                let bigDiv = $('.clickableCodeLinks');
+                bigDiv.append(tempDiv);
+                console.log(bigDiv);
+            }
+        }
+    }
+
+    function errData(err) {
+        console.log('Lost Data!');
+        console.log(err);
+    }
+
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
