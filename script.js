@@ -35,7 +35,7 @@ $(function() {
 
     coding.once("value", gotData, errData);
 
-    var currentPage = document.location.href.match(/[^\/]+$/);
+    var currentPage = document.location;
     currentPage = currentPage.toString();
     
     console.log(currentPage);
