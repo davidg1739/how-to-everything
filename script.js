@@ -1,20 +1,4 @@
-var c;
-
-function setup() {
-    c = getURLParams();
-    if (c.id != undefined) {
-        return;
-    }
-    else {
-        // let tempLink = $('<a></a>');
-        // tempLink.attr('href', '?id=' + userInput);
-        // tempLink.html(userInput);
-        // let para = $('#content');
-    }
-}
-
 $(function() {
-    console.log(c);
     var database;
     // Initialize Firebase
     var config = {
@@ -32,55 +16,150 @@ $(function() {
     var cooking = database.ref('cooking');
     var science = database.ref('science');
     var gitTutorials = coding.child('Git-Github')
+    var p5jsTutorials = coding.child('P5JS');
 
-    coding.once("value", gotData, errData);
+    gitTutorials.once("value", gotGitData, errData);
+    p5jsTutorials.once("value", gotP5Data, errData);
 
-    var currentPage = document.location;
-    var tempText;
-    currentPage = currentPage.toString();
-    if (currentPage.lastIndexOf('/')) {
-        let tempNum = currentPage.lastIndexOf('/');
-        let pageLength = currentPage.length;
-        tempText = [];
-        while (tempNum <= pageLength) {
-            tempText.push(currentPage[tempNum]);
-            tempNum+=1;
+    var acc = document.getElementsByClassName("accordion");
+    var z;
+
+    for (z = 0; z < acc.length; z++) {
+        acc[z].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            }
+            else {
+                panel.style.display = "block";
+            }
+        });
+    }
+
+    function gotGitData(data) {
+        console.log(data.val());
+        console.log(data.val());
+        let newData = data.val();
+        // Grab the keys to iterate over the comments
+        var keys = Object.keys(newData);
+
+        for (let i = 0; i < keys.length; i++) {
+            var key = keys[i];
+            let dataPiece = newData[key];
+            console.log(dataPiece);
+            let title = dataPiece.Title;
+            var gitLink;
+            var gitLinkElement;
+            var isThereALink =  false;
+            if (dataPiece.Link) {
+                gitLink = dataPiece.Link;
+                gitLinkElement = $('<iframe></iframe>');
+                gitLinkElement.attr('src', gitLink);
+                gitLinkElement.css('width', '100%').css('height', '50%');
+                isThereALink = true;
+            }
+            var isThereALinkNotOwned = false;
+            var gitLinkElementNotOwned;
+            if (dataPiece.LinkNotOwned) {
+                gitLinkElementNotOwned = $('<a></a>');
+                gitLinkElementNotOwned.attr('href', dataPiece.LinkNotOwned);
+                gitLinkElementNotOwned.text(dataPiece.LinkNotOwned)
+                isThereALinkNotOwned = true;
+            }
+            
+            console.log(title);
+
+            let gitPanelClass = $('.gitPanel');
+            gitPanelClass.css('width', '100%').css('height', '100%');
+            var isThereInfo = false;
+            var gitInfoElement;
+            if (dataPiece.Info) {
+                gitInfoElement = $('<p></p>');
+                gitInfoElement.html(dataPiece.Info);
+                isThereInfo = true;
+            }
+            let titleElement = $('<h1></h1>');
+            titleElement.html(title);
+            titleElement.css('text-align', 'center');
+            gitPanelClass.append(titleElement);
+            
+            if (isThereALink) {
+                gitPanelClass.append(gitLinkElement);
+                isThereALink = false;
+            }
+            
+            if (isThereALinkNotOwned) {
+                gitPanelClass.append(gitLinkElementNotOwned);
+                isThereALinkNotOwned = false;
+            }
+            
+            if (isThereInfo) {
+                gitPanelClass.append(gitInfoElement);
+                isThereInfo = false;
+            }
         }
     }
-    tempText = tempText.toString();
-    currentPage = tempText;
-    console.log(currentPage);
     
-    function gotData(data) {
-        if (currentPage == 'index.html' || currentPage == '') {
-            return;
-        }
-        else if (currentPage == 'coding.html') {
-            $('.clickableCodeLinks').empty();
-            let newData = data.val();
-            console.log(newData);
-            // Grab the keys to iterate over the comments
-            var keys = Object.keys(newData);
+    function gotP5Data(data) {
+        let newData = data.val();
+        // Grab the keys to iterate over the comments
+        var keys = Object.keys(newData);
 
-            for (var i = 0; i < keys.length; i++) {
-                var key = keys[i];
-                let dataPiece = newData[key];
-                console.log(dataPiece);
-                let param = newData[key].Parameter;
-                param = param.toString();
-                console.log(param);
-                let title = newData[key].Title;
-                console.log(title);
+        for (let i = 0; i < keys.length; i++) {
+            var key = keys[i];
+            let dataPiece = newData[key];
+            console.log(dataPiece);
+            let title = dataPiece.Title;
+            var p5Link;
+            var p5LinkElement;
+            var isThereALink =  false;
+            if (dataPiece.Link) {
+                p5Link = dataPiece.Link;
+                p5LinkElement = $('<iframe></iframe>');
+                p5LinkElement.attr('src', p5Link);
+                p5LinkElement.css('width', '100%').css('height', '50%');
+                isThereALink = true;
+            }
+            
+            var isThereALinkNotOwned = false;
+            var p5LinkElementNotOwned;
+            if (dataPiece.LinkNotOwned) {
+                p5LinkElementNotOwned = $('<a></a>');
+                p5LinkElementNotOwned.attr('href', dataPiece.LinkNotOwned);
+                p5LinkElementNotOwned.text(dataPiece.LinkNotOwned)
+                isThereALinkNotOwned = true;
+            }
+            
+            console.log(title);
 
-                let tempLink = $('<a></a>');
-                tempLink.attr('href', '?id=' + param);
-                tempLink.html(title);
-                console.log(tempLink);
-                let tempDiv = $('<div></div>');
-                tempDiv.append(tempLink);
-                let bigDiv = $('.clickableCodeLinks');
-                bigDiv.append(tempDiv);
-                console.log(bigDiv);
+            let p5PanelClass = $('.p5Panel');
+            p5PanelClass.css('width', '100%').css('height', '100%');
+            var isThereInfo = false;
+            var p5InfoElement;
+            if (dataPiece.Info) {
+                p5InfoElement = $('<p></p>');
+                p5InfoElement.html(dataPiece.Info);
+                isThereInfo = true;
+            }
+            let titleElement = $('<h1></h1>');
+            titleElement.html(title);
+            titleElement.css('text-align', 'center');
+            p5PanelClass.append(titleElement);
+            
+            if (isThereALink) {
+                p5PanelClass.append(p5LinkElement);
+                isThereALink = false;
+            }
+            
+            if (isThereALinkNotOwned) {
+                p5PanelClass.append(p5LinkElementNotOwned);
+                isThereALinkNotOwned = false;
+            }
+            
+            if (isThereInfo) {
+                p5PanelClass.append(p5InfoElement);
+                isThereInfo = false;
             }
         }
     }
