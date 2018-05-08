@@ -122,6 +122,12 @@ body {
     margin-top: 100px;
 }
 
+.textForCategoriesHeading {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 10px;
+    text-align:center;
+}
+
 @media(max-width: 768px) {
     .textForIntro {}
 }
@@ -132,12 +138,18 @@ body {
     .textForIntro {
         font-size: 20px;
     }
+    .textForCategoriesHeading {
+        font-size: 20px;
+    }
 }
 
 /* lag+ */
 
 @media(min-width: 1200px) {
     .textForIntro {
+        font-size: 40px;
+    }
+    .textForCategoriesHeading {
         font-size: 40px;
     }
 }
