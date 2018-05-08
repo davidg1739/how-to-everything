@@ -38,8 +38,6 @@ $(function() {
     }
 
     function gotGitData(data) {
-        console.log(data.val());
-        console.log(data.val());
         let newData = data.val();
         // Grab the keys to iterate over the comments
         var keys = Object.keys(newData);
@@ -47,7 +45,6 @@ $(function() {
         for (let i = 0; i < keys.length; i++) {
             var key = keys[i];
             let dataPiece = newData[key];
-            console.log(dataPiece);
             let title = dataPiece.Title;
             var gitLink;
             var gitLinkElement;
@@ -67,8 +64,6 @@ $(function() {
                 gitLinkElementNotOwned.text(dataPiece.LinkNotOwned)
                 isThereALinkNotOwned = true;
             }
-            
-            console.log(title);
 
             let gitPanelClass = $('.gitPanel');
             gitPanelClass.css('width', '100%').css('height', '100%');
@@ -109,7 +104,6 @@ $(function() {
         for (let i = 0; i < keys.length; i++) {
             var key = keys[i];
             let dataPiece = newData[key];
-            console.log(dataPiece);
             let title = dataPiece.Title;
             var p5Link;
             var p5LinkElement;
@@ -130,8 +124,6 @@ $(function() {
                 p5LinkElementNotOwned.text(dataPiece.LinkNotOwned)
                 isThereALinkNotOwned = true;
             }
-            
-            console.log(title);
 
             let p5PanelClass = $('.p5Panel');
             p5PanelClass.css('width', '100%').css('height', '100%');
