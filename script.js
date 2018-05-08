@@ -17,9 +17,11 @@ $(function() {
     var science = database.ref('science');
     var gitTutorials = coding.child('Git-Github')
     var p5jsTutorials = coding.child('P5JS');
+    var htmlTutorials = coding.child('HTML');
 
     gitTutorials.once("value", gotGitData, errData);
     p5jsTutorials.once("value", gotP5Data, errData);
+    htmlTutorials.once("value", gotHtmlData, errData);
 
     var acc = document.getElementsByClassName("accordion");
     var z;
@@ -151,6 +153,66 @@ $(function() {
             
             if (isThereInfo) {
                 p5PanelClass.append(p5InfoElement);
+                isThereInfo = false;
+            }
+        }
+    }
+    
+    function gotHtmlData(data) {
+        let newData = data.val();
+        // Grab the keys to iterate over the comments
+        var keys = Object.keys(newData);
+
+        for (let i = 0; i < keys.length; i++) {
+            var key = keys[i];
+            let dataPiece = newData[key];
+            let title = dataPiece.Title;
+            var htmlLink;
+            var htmlLinkElement;
+            var isThereALink =  false;
+            if (dataPiece.Link) {
+                htmlLink = dataPiece.Link;
+                htmlLinkElement = $('<iframe></iframe>');
+                htmlLinkElement.attr('src', htmlLink);
+                p5LinkElement.css('width', '100%').css('height', '50%');
+                isThereALink = true;
+            }
+            
+            var isThereALinkNotOwned = false;
+            var htmlLinkElementNotOwned;
+            if (dataPiece.LinkNotOwned) {
+                htmlLinkElementNotOwned = $('<a></a>');
+                htmlLinkElementNotOwned.attr('href', dataPiece.LinkNotOwned);
+                htmlLinkElementNotOwned.text(dataPiece.LinkNotOwned)
+                isThereALinkNotOwned = true;
+            }
+
+            let htmlPanelClass = $('.htmlPanel');
+            htmlPanelClass.css('width', '100%').css('height', '100%');
+            var isThereInfo = false;
+            var htmlInfoElement;
+            if (dataPiece.Info) {
+                htmlInfoElement = $('<p></p>');
+                htmlInfoElement.html(dataPiece.Info);
+                isThereInfo = true;
+            }
+            let titleElement = $('<h1></h1>');
+            titleElement.html(title);
+            titleElement.css('text-align', 'center');
+            htmlPanelClass.append(titleElement);
+            
+            if (isThereALink) {
+                htmlPanelClass.append(htmlLinkElement);
+                isThereALink = false;
+            }
+            
+            if (isThereALinkNotOwned) {
+                htmlPanelClass.append(htmlLinkElementNotOwned);
+                isThereALinkNotOwned = false;
+            }
+            
+            if (isThereInfo) {
+                htmlPanelClass.append(htmlInfoElement);
                 isThereInfo = false;
             }
         }
