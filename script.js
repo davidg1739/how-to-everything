@@ -327,14 +327,14 @@ $(function() {
 
 
     $('.coding').click(function() {
-        window.open('coding.html');
+        window.open('coding.html', '_self');
     });
 
     $('.cooking').click(function() {
-        window.open('cooking.html');
+        window.open('cooking.html', '_self');
     });
 
     $('.science').click(function() {
-        window.open('science.html');
+        window.open('science.html', '_self');
     });
 });
