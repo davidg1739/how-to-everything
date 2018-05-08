@@ -15,9 +15,12 @@ $(function() {
     var coding = database.ref('coding');
     var cooking = database.ref('cooking');
     var science = database.ref('science');
-    var gitTutorials = coding.child('Git-Github')
+    var gitTutorials = coding.child('Git-Github');
     var p5jsTutorials = coding.child('P5JS');
     var htmlTutorials = coding.child('HTML');
+    var physicsTutorials = science.child('Physics');
+    
+    physicsTutorials.once("value", gotPhysicsData, errData);
 
     gitTutorials.once("value", gotGitData, errData);
     p5jsTutorials.once("value", gotP5Data, errData);
@@ -174,7 +177,7 @@ $(function() {
                 htmlLink = dataPiece.Link;
                 htmlLinkElement = $('<iframe></iframe>');
                 htmlLinkElement.attr('src', htmlLink);
-                p5LinkElement.css('width', '100%').css('height', '50%');
+                htmlLinkElement.css('width', '100%').css('height', '50%');
                 isThereALink = true;
             }
             
@@ -213,6 +216,66 @@ $(function() {
             
             if (isThereInfo) {
                 htmlPanelClass.append(htmlInfoElement);
+                isThereInfo = false;
+            }
+        }
+    }
+    
+    function gotPhysicsData(data) {
+        let newData = data.val();
+        // Grab the keys to iterate over the comments
+        var keys = Object.keys(newData);
+
+        for (let i = 0; i < keys.length; i++) {
+            var key = keys[i];
+            let dataPiece = newData[key];
+            let title = dataPiece.Title;
+            var physicsLink;
+            var physicsLinkElement;
+            var isThereALink =  false;
+            if (dataPiece.Link) {
+                physicsLink = dataPiece.Link;
+                physicsLinkElement = $('<iframe></iframe>');
+                physicsLinkElement.attr('src', physicsLink);
+                physicsLinkElement.css('width', '100%').css('height', '50%');
+                isThereALink = true;
+            }
+            
+            var isThereALinkNotOwned = false;
+            var physicsLinkElementNotOwned;
+            if (dataPiece.LinkNotOwned) {
+                physicsLinkElementNotOwned = $('<a></a>');
+                physicsLinkElementNotOwned.attr('href', dataPiece.LinkNotOwned);
+                physicsLinkElementNotOwned.text(dataPiece.LinkNotOwned);
+                isThereALinkNotOwned = true;
+            }
+
+            let physicsPanelClass = $('.physicsPanel');
+            physicsPanelClass.css('width', '100%').css('height', '100%');
+            var isThereInfo = false;
+            var physicsInfoElement;
+            if (dataPiece.Info) {
+                physicsInfoElement = $('<p></p>');
+                physicsInfoElement.html(dataPiece.Info);
+                isThereInfo = true;
+            }
+            let titleElement = $('<h1></h1>');
+            titleElement.html(title);
+            titleElement.css('text-align', 'center');
+            physicsPanelClass.append(titleElement);
+            
+            if (isThereALink) {
+                physicsPanelClass.append(physicsLinkElement);
+                isThereALink = false;
+            }
+            
+            if (isThereALinkNotOwned) {
+                physicsPanelClass.append(physicsLinkElementNotOwned);
+                isThereALinkNotOwned = false;
+            }
+            
+            if (isThereInfo) {
+                physicsPanelClass.append(physicsInfoElement);
                 isThereInfo = false;
             }
         }
