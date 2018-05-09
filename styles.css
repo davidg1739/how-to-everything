@@ -30,11 +30,11 @@ body {
 }
 
 .nav-item {
-    background-color: #a2b9bc;
+    background-color: #a2b9bc !important;
 }
 
 #nav-id {
-    background-color: #a2b9bc;
+    background-color: #a2b9bc !important;
 }
 
 .coding {
@@ -197,6 +197,18 @@ iframe {
 
 .active, .accordion:hover {
     background-color: #ccc; 
+}
+
+.accordion:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 
 .panel {

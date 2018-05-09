@@ -32,7 +32,7 @@ $(function() {
     var z;
 
     for (z = 0; z < acc.length; z++) {
-        $(acc[z]).on("click", function() {
+        acc[z].addEventListener("click", function() {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
             if (panel.style.display === "block") {
@@ -44,27 +44,17 @@ $(function() {
         });
     }
 
-    // $(acc).on('click', function () {
-    //     lookAtAcc();
-    // });
-
-    function lookAtAcc() {
-        for (z = 0; z < acc.length; z++) {
-        $(acc[z]).on("click", function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-            }
-            else {
-                panel.style.display = "block";
-            }
-        });
-    }
-
-    }
-
-    lookAtAcc();
+    $('.cookingPageContent').on('click', '.accordion', function() {
+        //do something
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        }
+        else {
+            panel.style.display = "block";
+        }
+    });
 
     function gotGitData(data) {
         let newData = data.val();
@@ -123,7 +113,6 @@ $(function() {
                 isThereInfo = false;
             }
         }
-        lookAtAcc();
     }
 
     function gotP5Data(data) {
@@ -184,7 +173,6 @@ $(function() {
                 isThereInfo = false;
             }
         }
-        lookAtAcc();
     }
 
     function gotHtmlData(data) {
@@ -245,7 +233,6 @@ $(function() {
                 isThereInfo = false;
             }
         }
-        lookAtAcc();
     }
 
     function gotPhysicsData(data) {
@@ -306,7 +293,6 @@ $(function() {
                 isThereInfo = false;
             }
         }
-        lookAtAcc();
     }
 
     function gotCookingData(data) {
@@ -378,12 +364,10 @@ $(function() {
                 areThereDirections = true;
             }
 
-            let tempAcc = $('<buttton></button>');
-            tempAcc.addClass('accordion');
+            let tempAcc = $('<buttton class="accordion"></button>');
             tempAcc.html(title);
 
-            let tempPanel = $('<div></div>');
-            tempPanel.addClass('panel');
+            let tempPanel = $('<div class="panel"></div>');
             tempPanel.css('width', '100%').css('height', '100%');
 
             var isThereInfo = false;
@@ -425,12 +409,12 @@ $(function() {
 
 
             let cookingContentDiv = $('.cookingPageContent');
+            $(tempAcc).css('width', '100%').css('height', '100%');
+            cookingContentDiv.css('width', '100%').css('height', '100%');
+
+            cookingContentDiv.append('<br><br><br>');
             cookingContentDiv.append(tempAcc);
             cookingContentDiv.append(tempPanel);
-            console.log(cookingContentDiv);
-            console.log(tempPanel);
-            console.log(tempAcc);
-            lookAtAcc();
         }
     }
 
