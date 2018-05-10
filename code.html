@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Code</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .navbar-fixed-top {
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <ul class="nav nav-tabs navbar-fixed-top">
+            <li class="active"><a href="#index">index.html</a></li>
+            <li><a href="#aboutPage">about.html</a></li>
+            <li><a href="#codingPage">coding.html</a></li>
+            <li><a href="#sciencePage">science.html</a></li>
+            <li><a href="#cookingPage">cooking.html</a></li>
+            <li><a href="#script">script.js</a></li>
+            <li><a href="#style">style.css</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="index" class="tab-pane fade in active">
+                <script src="https://gist-it.appspot.com/github/davidg1739/how-to-everything/raw/master/index.html?footer=0"></script>
+            </div>
+            <div id="aboutPage" class="tab-pane fade in active">
+                <script src="https://gist-it.appspot.com/github/davidg1739/how-to-everything/raw/master/about.html?footer=0"></script>
+            </div>
+            <div id="codingPage" class="tab-pane fade in active">
+                <script src="https://gist-it.appspot.com/github/davidg1739/how-to-everything/raw/master/coding.html?footer=0"></script>
+            </div>
+            <div id="sciencePage" class="tab-pane fade in active">
+                <script src="https://gist-it.appspot.com/github/davidg1739/how-to-everything/raw/master/science.html?footer=0"></script>
+            </div>
+            <div id="cookingPage" class="tab-pane fade in active">
+                <script src="https://gist-it.appspot.com/github/davidg1739/how-to-everything/raw/master/cooking.html?footer=0"></script>
+            </div>
+            <div id="script" class="tab-pane fade in active">
+                <script src="https://gist-it.appspot.com/github/davidg1739/how-to-everything/raw/master/script.js?footer=0"></script>
+            </div>
+            <div id="style" class="tab-pane fade">
+                <script src="https://gist-it.appspot.com/github/davidg1739/how-to-everything/raw/master/styles.css?footer=0"></script>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $(".nav-tabs a").click(function() {
+                $(this).tab('show');
+            });
+            $('.nav-tabs a').on('shown.bs.tab', function(event) {
+                var x = $(event.target).text(); // active tab
+                var y = $(event.relatedTarget).text(); // previous tab
+                $(".act span").text(x);
+                $(".prev span").text(y);
+            });
+            
+            $('pre').css('font-size','16px');
+        });
+    </script>
+
+</body>
+
+</html>
