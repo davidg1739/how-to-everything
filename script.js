@@ -1,4 +1,8 @@
 $(function() {
+    var path = window.location.pathname;
+    var page = path.split("/").pop();
+    console.log(page);
+
     var database;
     // Initialize Firebase
     var config = {
@@ -44,17 +48,20 @@ $(function() {
         });
     }
 
-    $('.cookingPageContent').on('click', '.accordion', function() {
-        //do something
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        }
-        else {
-            panel.style.display = "block";
-        }
-    });
+    if (page.toString() == 'cooking.html') {
+        $('.content').on('click', '.accordion', function() {
+            //do something
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            }
+            else {
+                panel.style.display = "block";
+            }
+        });
+    }
+
 
     function gotGitData(data) {
         let newData = data.val();
@@ -296,125 +303,126 @@ $(function() {
     }
 
     function gotCookingData(data) {
-        let newData = data.val();
-        // Grab the keys to iterate over the comments
-        var keys = Object.keys(newData);
+        if (page.toString() == 'cooking.html') {
+            let newData = data.val();
+            // Grab the keys to iterate over the comments
+            var keys = Object.keys(newData);
 
-        for (let i = 0; i < keys.length; i++) {
-            var key = keys[i];
-            let dataPiece = newData[key];
-            let title = dataPiece.Title;
-            var cookingLink;
-            var cookingLinkElement;
-            var isThereALink = false;
-            if (dataPiece.Link) {
-                cookingLink = dataPiece.Link;
-                cookingLinkElement = $('<iframe></iframe>');
-                cookingLinkElement.attr('src', cookingLink);
-                cookingLinkElement.css('width', '100%').css('height', '50%');
-                isThereALink = true;
-            }
-
-            var isThereALinkNotOwned = false;
-            var cookingLinkElementNotOwned;
-            if (dataPiece.LinkNotOwned) {
-                cookingLinkElementNotOwned = $('<a></a>');
-                cookingLinkElementNotOwned.attr('href', dataPiece.LinkNotOwned);
-                cookingLinkElementNotOwned.text(dataPiece.LinkNotOwned);
-                isThereALinkNotOwned = true;
-            }
-
-            var areThereIngredients = false;
-            var ingredientDivElement;
-            if (dataPiece.Ingredients) {
-                var ing = dataPiece.Ingredients;
-                var numOfIngredients = Object.keys(ing).length;
-                ingredientDivElement = $('<div></div>');
-                let ingredientTitleElement = $('<h1></h1>');
-                ingredientTitleElement.html('Ingredients:');
-                var orderedIngredientList = $('<ol></ol>');
-                for (let q = 0; q <= numOfIngredients; q++) {
-                    let newListItem = $('<li></li>');
-                    newListItem.text(ing['Ingredient ' + q]);
-                    newListItem.appendTo(orderedIngredientList);
-
+            for (let i = 0; i < keys.length; i++) {
+                var key = keys[i];
+                let dataPiece = newData[key];
+                let title = dataPiece.Title;
+                var cookingLink;
+                var cookingLinkElement;
+                var isThereALink = false;
+                if (dataPiece.Link) {
+                    cookingLink = dataPiece.Link;
+                    cookingLinkElement = $('<iframe></iframe>');
+                    cookingLinkElement.attr('src', cookingLink);
+                    cookingLinkElement.css('width', '100%').css('height', '50%');
+                    isThereALink = true;
                 }
-                ingredientDivElement.append(ingredientTitleElement);
-                ingredientDivElement.append(orderedIngredientList);
-                areThereIngredients = true;
-            }
 
-            var areThereDirections = false;
-            var directionDivElement;
-            if (dataPiece.Directions) {
-                var directions = dataPiece.Directions;
-                var numOfDirections = Object.keys(directions).length;
-                directionDivElement = $('<div></div>');
-                let directionTitleElement = $('<h1></h1>');
-                directionTitleElement.html('Directions:');
-                var orderedDirectionList = $('<ol></ol>');
-                for (let b = 0; b <= numOfDirections; b++) {
-                    let newListItem = $('<li></li>');
-                    newListItem.text(ing['Ingredient ' + b]);
-                    newListItem.appendTo(orderedDirectionList);
-
+                var isThereALinkNotOwned = false;
+                var cookingLinkElementNotOwned;
+                if (dataPiece.LinkNotOwned) {
+                    cookingLinkElementNotOwned = $('<a></a>');
+                    cookingLinkElementNotOwned.attr('href', dataPiece.LinkNotOwned);
+                    cookingLinkElementNotOwned.text(dataPiece.LinkNotOwned);
+                    isThereALinkNotOwned = true;
                 }
-                directionDivElement.append(directionTitleElement);
-                directionDivElement.append(orderedDirectionList);
-                areThereDirections = true;
+
+                var areThereIngredients = false;
+                var ingredientDivElement;
+                if (dataPiece.Ingredients) {
+                    var ing = dataPiece.Ingredients;
+                    var numOfIngredients = Object.keys(ing).length;
+                    ingredientDivElement = $('<div></div>');
+                    let ingredientTitleElement = $('<h1></h1>');
+                    ingredientTitleElement.html('Ingredients:');
+                    var orderedIngredientList = $('<ol></ol>');
+                    for (let q = 0; q <= numOfIngredients; q++) {
+                        let newListItem = $('<li></li>');
+                        newListItem.text(ing['Ingredient ' + q]);
+                        newListItem.appendTo(orderedIngredientList);
+
+                    }
+                    ingredientDivElement.append(ingredientTitleElement);
+                    ingredientDivElement.append(orderedIngredientList);
+                    areThereIngredients = true;
+                }
+
+                var areThereDirections = false;
+                var directionDivElement;
+                if (dataPiece.Directions) {
+                    var directions = dataPiece.Directions;
+                    var numOfDirections = Object.keys(directions).length;
+                    directionDivElement = $('<div></div>');
+                    let directionTitleElement = $('<h1></h1>');
+                    directionTitleElement.html('Directions:');
+                    var orderedDirectionList = $('<ol></ol>');
+                    for (let b = 0; b <= numOfDirections; b++) {
+                        let newListItem = $('<li></li>');
+                        newListItem.text(ing['Ingredient ' + b]);
+                        newListItem.appendTo(orderedDirectionList);
+
+                    }
+                    directionDivElement.append(directionTitleElement);
+                    directionDivElement.append(orderedDirectionList);
+                    areThereDirections = true;
+                }
+
+                let tempAcc = $('<buttton class="accordion"><span class="accTitle"></span></button>');
+                $(tempAcc.span).html(title);
+
+                let tempPanel = $('<div class="panel"></div>');
+                tempPanel.css('width', '100%').css('height', '100%');
+
+                var isThereInfo = false;
+                var cookingInfoElement;
+                if (dataPiece.Info) {
+                    cookingInfoElement = $('<p></p>');
+                    cookingInfoElement.html(dataPiece.Info);
+                    isThereInfo = true;
+                }
+                let titleElement = $('<h1></h1>');
+                titleElement.html(title);
+                titleElement.css('text-align', 'center');
+                tempPanel.append(titleElement);
+
+                if (areThereIngredients) {
+                    tempPanel.append(ingredientDivElement);
+                    areThereIngredients = false;
+                }
+
+                if (areThereDirections) {
+                    tempPanel.append(directionDivElement);
+                    areThereDirections = false;
+                }
+
+                if (isThereALink) {
+                    tempPanel.append(cookingLinkElement);
+                    isThereALink = false;
+                }
+
+                if (isThereALinkNotOwned) {
+                    tempPanel.append(cookingLinkElementNotOwned);
+                    isThereALinkNotOwned = false;
+                }
+
+                if (isThereInfo) {
+                    tempPanel.append(cookingInfoElement);
+                    isThereInfo = false;
+                }
+
+
+                let cookingContentDiv = $('.content');
+                $(tempAcc).css('width', '100%').css('height', '100%');
+
+                cookingContentDiv.append('<br><br><br>');
+                cookingContentDiv.append(tempAcc);
+                cookingContentDiv.append(tempPanel);
             }
-
-            let tempAcc = $('<buttton class="accordion"></button>');
-            tempAcc.html(title);
-
-            let tempPanel = $('<div class="panel"></div>');
-            tempPanel.css('width', '100%').css('height', '100%');
-
-            var isThereInfo = false;
-            var cookingInfoElement;
-            if (dataPiece.Info) {
-                cookingInfoElement = $('<p></p>');
-                cookingInfoElement.html(dataPiece.Info);
-                isThereInfo = true;
-            }
-            let titleElement = $('<h1></h1>');
-            titleElement.html(title);
-            titleElement.css('text-align', 'center');
-            tempPanel.append(titleElement);
-
-            if (areThereIngredients) {
-                tempPanel.append(ingredientDivElement);
-                areThereIngredients = false;
-            }
-
-            if (areThereDirections) {
-                tempPanel.append(directionDivElement);
-                areThereDirections = false;
-            }
-
-            if (isThereALink) {
-                tempPanel.append(cookingLinkElement);
-                isThereALink = false;
-            }
-
-            if (isThereALinkNotOwned) {
-                tempPanel.append(cookingLinkElementNotOwned);
-                isThereALinkNotOwned = false;
-            }
-
-            if (isThereInfo) {
-                tempPanel.append(cookingInfoElement);
-                isThereInfo = false;
-            }
-
-
-            let cookingContentDiv = $('.cookingPageContent');
-            $(tempAcc).css('width', '100%').css('height', '100%');
-            cookingContentDiv.css('width', '100%').css('height', '100%');
-
-            cookingContentDiv.append('<br><br><br>');
-            cookingContentDiv.append(tempAcc);
-            cookingContentDiv.append(tempPanel);
         }
     }
 
