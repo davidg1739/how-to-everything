@@ -48,6 +48,10 @@ $(function() {
         });
     }
 
+    $('.categoryPickerOption').click(function() {
+        console.log($(this).val());
+    });
+
     if (page.toString() == 'cooking.html') {
         $('.content').on('click', '.accordion', function() {
             //do something
@@ -61,6 +65,7 @@ $(function() {
             }
         });
     }
+
 
 
     function gotGitData(data) {
@@ -372,8 +377,10 @@ $(function() {
                     areThereDirections = true;
                 }
 
-                let tempAcc = $('<buttton class="accordion"><span class="accTitle"></span></button>');
-                $(tempAcc.span).html(title);
+                let tempAcc = $('<buttton class="accordion"></button>');
+                let tempSpan = $('<span class="accTitle"></span>');
+                tempSpan.html(title);
+                $(tempAcc).append(tempSpan);
 
                 let tempPanel = $('<div class="panel"></div>');
                 tempPanel.css('width', '100%').css('height', '100%');

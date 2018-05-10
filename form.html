@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How To Everything</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
+
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <nav id='nav-id' class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#"><img class='logo' src="images/Logo/HTE.png" width="30" class="d-inline-block align-top" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+
+                <li class="nav-item logInButton">
+                    <a class="nav-link log">Log In</a>
+                </li>
+
+                <li class="nav-item logOutButton">
+                    <a class="nav-link log">Log Out</a>
+                </li>
+                <li class="nav-brand userImageItem">
+                    <img class='userImage' width="50" height="50">
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class='content'>
+        <h1 id='formPageHeader'>Submission Form</h1>
+        <span>Category:</span>
+        <select id="categoryPicker">
+            <option class='categoryPickerOption' value="coding, P5JS" selected>Coding - P5JS</option>
+            <option class='categoryPickerOption' value="cooking">Cooking</option>
+            <option class='categoryPickerOption' value="science, Physics">Science - Physics</option>
+            <option class='categoryPickerOption' value="coding, HTML">Coding - HTML</option>
+            <option class='categoryPickerOption' value="cooking, Git-Github">Cooking - Git-Github</option>
+            <option class='categoryPickerOption' value="science">Science</option>
+        </select><br> <br>
+        <span>Info Type Chooser:</span><div class='infoTypeChooser'>
+            <span>
+                <select id="infoUserWantsToAdd">
+                    <option class='infoPicker' value="Title" selected>Title</option>
+                    <option class='infoPickerOption' value="Link">Link</option>
+                    <option class='infoPickerOption' value="LinkNotOwned">Link Not Owned</option>
+                    <option class='infoPickerOption' value="Info">Info</option>
+                    <option class='infoPickerOption' value="Directions">Directions</option>
+                    <option class='infoPickerOption' value="Ingredients">Ingredients</option>
+                </select>
+            </span> 
+            <input id="infoUserWantsToAddText" placeholder="ex: Telecommunications"><br>
+        </div><br><br>
+
+        <button id='generateButton'>Generate ID</button><br>
+    </div>
+</body>
+
+</html>
