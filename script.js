@@ -67,7 +67,6 @@ $(function() {
     }
 
 
-
     function gotGitData(data) {
         let newData = data.val();
         // Grab the keys to iterate over the comments
