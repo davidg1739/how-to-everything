@@ -32,6 +32,64 @@ $(function() {
 
     cooking.once("value", gotCookingData, errData);
 
+    $('.submitInputsToDatabase').click(function() {
+        let categoryPicked = $('.categoryChoice').val().split(',');
+        let titlePicked = $('.titleInput').val();
+        let infoPicked = $('.infoInput').val();
+        let linkPicked = $('.linkInput').val();
+        let linkNotOwnedPicked = $('.linkNotOwnedInput').val();
+        if (categoryPicked[1]) {
+            if (categoryPicked[1] == ' P5JS') {
+                console.log('djdijd');
+                let data = {
+                    Title: titlePicked,
+                    Info: infoPicked,
+                    Link: linkPicked,
+                    LinkNotOwned: linkNotOwnedPicked
+                };
+                
+                p5jsTutorials.push(data);
+            }
+            if (categoryPicked[1] == ' HTML') {
+                let data = {
+                    Title: titlePicked,
+                    Info: infoPicked,
+                    Link: linkPicked,
+                    LinkNotOwned: linkNotOwnedPicked
+                };
+                htmlTutorials.push(data);
+            }
+            if (categoryPicked[1] == ' Git-Github') {
+                let data = {
+                    Title: titlePicked,
+                    Info: infoPicked,
+                    Link: linkPicked,
+                    LinkNotOwned: linkNotOwnedPicked
+                };
+                gitTutorials.push(data);
+            }
+            if (categoryPicked[1] == 'Physics') {
+                let data = {
+                    Title: titlePicked,
+                    Info: infoPicked,
+                    Link: linkPicked,
+                    LinkNotOwned: linkNotOwnedPicked
+                };
+                physicsTutorials.push(data);
+            }
+        }
+        else {
+            let data = {
+                Title: titlePicked,
+                Info: infoPicked,
+                Link: linkPicked,
+                LinkNotOwned: linkNotOwnedPicked
+            };
+            cooking.push(data);
+        }
+        console.log(categoryPicked);
+    });
+
     var acc = document.getElementsByClassName("accordion");
     var z;
 
@@ -48,9 +106,6 @@ $(function() {
         });
     }
 
-    $('.categoryPickerOption').click(function() {
-        console.log($(this).val());
-    });
 
     if (page.toString() == 'cooking.html') {
         $('.content').on('click', '.accordion', function() {
@@ -84,7 +139,12 @@ $(function() {
                 gitLinkElement = $('<iframe></iframe>');
                 gitLinkElement.attr('src', gitLink);
                 gitLinkElement.css('width', '100%').css('height', '50%');
-                isThereALink = true;
+                if (dataPiece.Link == '' || dataPiece.Link == ' ') {
+                    isThereALink = false
+                }
+                else {
+                    isThereALink = true;
+                }
             }
             var isThereALinkNotOwned = false;
             var gitLinkElementNotOwned;
@@ -92,7 +152,12 @@ $(function() {
                 gitLinkElementNotOwned = $('<a></a>');
                 gitLinkElementNotOwned.attr('href', dataPiece.LinkNotOwned);
                 gitLinkElementNotOwned.text(dataPiece.LinkNotOwned)
-                isThereALinkNotOwned = true;
+                if (dataPiece.LinkNotOwned == '' || dataPiece.LinkNotOwned == ' ') {
+                    isThereALinkNotOwned = false
+                }
+                else {
+                    isThereALinkNotOwned = true;
+                }
             }
 
             let gitPanelClass = $('.gitPanel');
@@ -143,7 +208,12 @@ $(function() {
                 p5LinkElement = $('<iframe></iframe>');
                 p5LinkElement.attr('src', p5Link);
                 p5LinkElement.css('width', '100%').css('height', '50%');
-                isThereALink = true;
+                if (dataPiece.Link == '' || dataPiece.Link == ' ') {
+                    isThereALink = false
+                }
+                else {
+                    isThereALink = true;
+                }
             }
 
             var isThereALinkNotOwned = false;
@@ -152,7 +222,12 @@ $(function() {
                 p5LinkElementNotOwned = $('<a></a>');
                 p5LinkElementNotOwned.attr('href', dataPiece.LinkNotOwned);
                 p5LinkElementNotOwned.text(dataPiece.LinkNotOwned)
-                isThereALinkNotOwned = true;
+                if (dataPiece.LinkNotOwned == '' || dataPiece.LinkNotOwned == ' ') {
+                    isThereALinkNotOwned = false;
+                }
+                else {
+                    isThereALinkNotOwned = true;
+                }
             }
 
             let p5PanelClass = $('.p5Panel');
@@ -203,7 +278,12 @@ $(function() {
                 htmlLinkElement = $('<iframe></iframe>');
                 htmlLinkElement.attr('src', htmlLink);
                 htmlLinkElement.css('width', '100%').css('height', '50%');
-                isThereALink = true;
+                if (dataPiece.Link == '' || dataPiece.Link == ' ') {
+                    isThereALink = false
+                }
+                else {
+                    isThereALink = true;
+                }
             }
 
             var isThereALinkNotOwned = false;
@@ -212,7 +292,12 @@ $(function() {
                 htmlLinkElementNotOwned = $('<a></a>');
                 htmlLinkElementNotOwned.attr('href', dataPiece.LinkNotOwned);
                 htmlLinkElementNotOwned.text(dataPiece.LinkNotOwned)
-                isThereALinkNotOwned = true;
+                if (dataPiece.LinkNotOwned == '' || dataPiece.LinkNotOwned == ' ') {
+                    isThereALinkNotOwned = false;
+                }
+                else {
+                    isThereALinkNotOwned = true;
+                }
             }
 
             let htmlPanelClass = $('.htmlPanel');
@@ -263,7 +348,12 @@ $(function() {
                 physicsLinkElement = $('<iframe></iframe>');
                 physicsLinkElement.attr('src', physicsLink);
                 physicsLinkElement.css('width', '100%').css('height', '50%');
-                isThereALink = true;
+                if (dataPiece.Link == '' || dataPiece.Link == ' ') {
+                    isThereALink = false
+                }
+                else {
+                    isThereALink = true;
+                }
             }
 
             var isThereALinkNotOwned = false;
@@ -272,7 +362,12 @@ $(function() {
                 physicsLinkElementNotOwned = $('<a></a>');
                 physicsLinkElementNotOwned.attr('href', dataPiece.LinkNotOwned);
                 physicsLinkElementNotOwned.text(dataPiece.LinkNotOwned);
-                isThereALinkNotOwned = true;
+                if (dataPiece.LinkNotOwned == '' || dataPiece.LinkNotOwned == ' ') {
+                    isThereALinkNotOwned = false;
+                }
+                else {
+                    isThereALinkNotOwned = true;
+                }
             }
 
             let physicsPanelClass = $('.physicsPanel');
@@ -324,7 +419,12 @@ $(function() {
                     cookingLinkElement = $('<iframe></iframe>');
                     cookingLinkElement.attr('src', cookingLink);
                     cookingLinkElement.css('width', '100%').css('height', '50%');
-                    isThereALink = true;
+                    if (dataPiece.Link == '' || dataPiece.Link == ' ') {
+                        isThereALink = false
+                    }
+                    else {
+                        isThereALink = true;
+                    }
                 }
 
                 var isThereALinkNotOwned = false;
@@ -333,7 +433,12 @@ $(function() {
                     cookingLinkElementNotOwned = $('<a></a>');
                     cookingLinkElementNotOwned.attr('href', dataPiece.LinkNotOwned);
                     cookingLinkElementNotOwned.text(dataPiece.LinkNotOwned);
-                    isThereALinkNotOwned = true;
+                    if (dataPiece.LinkNotOwned == '' || dataPiece.LinkNotOwned == ' ') {
+                        isThereALinkNotOwned = false;
+                    }
+                    else {
+                        isThereALinkNotOwned = true;
+                    }
                 }
 
                 var areThereIngredients = false;
@@ -345,7 +450,7 @@ $(function() {
                     let ingredientTitleElement = $('<h1></h1>');
                     ingredientTitleElement.html('Ingredients:');
                     var orderedIngredientList = $('<ol></ol>');
-                    for (let q = 0; q <= numOfIngredients; q++) {
+                    for (let q = 1; q <= numOfIngredients; q++) {
                         let newListItem = $('<li></li>');
                         newListItem.text(ing['Ingredient ' + q]);
                         newListItem.appendTo(orderedIngredientList);
@@ -365,9 +470,9 @@ $(function() {
                     let directionTitleElement = $('<h1></h1>');
                     directionTitleElement.html('Directions:');
                     var orderedDirectionList = $('<ol></ol>');
-                    for (let b = 0; b <= numOfDirections; b++) {
+                    for (let b = 1; b <= numOfDirections; b++) {
                         let newListItem = $('<li></li>');
-                        newListItem.text(ing['Ingredient ' + b]);
+                        newListItem.text(directions['Step ' + b]);
                         newListItem.appendTo(orderedDirectionList);
 
                     }
@@ -478,14 +583,14 @@ $(function() {
 
 
     $('.coding').click(function() {
-        window.open('coding.html', '_self');
+        window.open('coding.html', '_blank');
     });
 
     $('.cooking').click(function() {
-        window.open('cooking.html', '_self');
+        window.open('cooking.html', '_blank');
     });
 
     $('.science').click(function() {
-        window.open('science.html', '_self');
+        window.open('science.html', '_blank');
     });
 });

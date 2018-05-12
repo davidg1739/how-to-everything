@@ -2,6 +2,7 @@ html,
 body {
     width: 100%;
     height: 100%;
+    background-color: #688986;
 
 }
 
@@ -133,18 +134,26 @@ body {
 
 .textForIntro {
     font-family: 'Gloria Hallelujah', cursive;
-    font-size: 10px;
     margin-top: 100px;
 }
 
 .textForCategoriesHeading {
     font-family: 'Gloria Hallelujah', cursive;
-    font-size: 10px;
     text-align: center;
 }
 
+.categoryText {
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+body {
+    background-color: #688986;
+}
+
 @media(max-width: 768px) {
-    .textForIntro {}
+    .textForIntro {
+        font-size:20px;
+    }
 }
 
 /* med+ */
@@ -162,15 +171,16 @@ body {
 
 @media(min-width: 1200px) {
     .textForIntro {
-        font-size: 40px;
+        font-size: 30px;
     }
     .textForCategoriesHeading {
-        font-size: 40px;
+        font-size: 30px;
     }
 }
 
 .categorieyContentDiv {
     margin: auto;
+    position:relative;
 }
 
 .githubProfileLink {
