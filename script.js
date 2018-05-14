@@ -38,9 +38,9 @@ $(function() {
         let infoPicked = $('.infoInput').val();
         let linkPicked = $('.linkInput').val();
         let linkNotOwnedPicked = $('.linkNotOwnedInput').val();
+        let directionInputText = $('.directionInput').val()
         if (categoryPicked[1]) {
             if (categoryPicked[1] == ' P5JS') {
-                console.log('djdijd');
                 let data = {
                     Title: titlePicked,
                     Info: infoPicked,
@@ -79,15 +79,21 @@ $(function() {
             }
         }
         else {
+            let dirList = directionInputText.split(',');
+            console.log(dirList);
+            var dirs = {};
+            for (let s = 1; s <= dirList.length; s++) {
+                dirs['Step ' + s] = dirList[s-1];
+            }
             let data = {
                 Title: titlePicked,
                 Info: infoPicked,
                 Link: linkPicked,
-                LinkNotOwned: linkNotOwnedPicked
+                LinkNotOwned: linkNotOwnedPicked,
+                Directions: dirs
             };
             cooking.push(data);
         }
-        console.log(categoryPicked);
     });
 
     var acc = document.getElementsByClassName("accordion");
