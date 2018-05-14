@@ -39,6 +39,7 @@ $(function() {
         let linkPicked = $('.linkInput').val();
         let linkNotOwnedPicked = $('.linkNotOwnedInput').val();
         let directionInputText = $('.directionInput').val()
+        let ingredientInputText = $('.ingredientInput').val()
         if (categoryPicked[1]) {
             if (categoryPicked[1] == ' P5JS') {
                 let data = {
@@ -80,17 +81,22 @@ $(function() {
         }
         else {
             let dirList = directionInputText.split(',');
-            console.log(dirList);
+            let ingList = ingredientInputText.split(',');
             var dirs = {};
+            var ings = {}
             for (let s = 1; s <= dirList.length; s++) {
                 dirs['Step ' + s] = dirList[s-1];
+            }
+            for (let x = 1; x <= ingList.length; x++) {
+                dirs['Ingredient ' + x] = dirList[x-1];
             }
             let data = {
                 Title: titlePicked,
                 Info: infoPicked,
                 Link: linkPicked,
                 LinkNotOwned: linkNotOwnedPicked,
-                Directions: dirs
+                Directions: dirs,
+                Ingredients: ings
             };
             cooking.push(data);
         }
